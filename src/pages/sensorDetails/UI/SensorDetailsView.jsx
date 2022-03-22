@@ -10,7 +10,7 @@ function SensorDetailsView({ data }) {
     setSwitchValue(event.target.checked);
   };
   const pmType = switchValue ? FILTER_BY.pm10 : FILTER_BY.pm25;
-  if (data === null) return <NoDataContainer />;
+  if (Object.keys(data).length === 0) return <NoDataContainer />;
 
   const average = data[pmType];
   return (
