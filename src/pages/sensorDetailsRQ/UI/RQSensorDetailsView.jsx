@@ -10,7 +10,7 @@ function RQSensorDetailsView({ data }) {
     setSwitchValue(event.target.checked);
   };
   const pmType = switchValue ? FILTER_BY.pm10 : FILTER_BY.pm25;
-  if (Object.keys(data).length === 0) return <NoDataContainer />;
+  if (data === null) return <NoDataContainer />;
 
   const average = data[pmType];
   return (

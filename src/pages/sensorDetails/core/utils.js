@@ -1,17 +1,20 @@
 import { FILTER_BY } from "./constants";
 
 export function filterBySensorIdAndPm(data, sensorId) {
+  if (data.length === 0) return null;
   const filteredData = data.filter(
     (item) =>
       item.sensorId === sensorId &&
       [FILTER_BY.pm10, FILTER_BY.pm25].includes(item.type)
   );
+  if (filteredData.length === 0) return null;
   return filteredData.reduce((acc, item) => {
     return { ...acc, [item.type]: [...(acc[item.type] || []), item] };
   }, {});
 }
 
 export function calculateAverageByPM(filteredDataByPm) {
+  if (!filteredDataByPm) return null;
   return Object.entries(filteredDataByPm).reduce((acc, group) => {
     const [key, items] = group;
     const calculateAverages = calculateAverage(items);
